@@ -2,6 +2,7 @@ services:
   - type: web
     name: keizoku
     env: docker
+    rootDir: .
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
