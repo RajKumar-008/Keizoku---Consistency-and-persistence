@@ -3,10 +3,19 @@
     "configurations": [
         {
             "type": "java",
-            "name": "DayForgeApplication (Spring Boot Server)",
+            "name": "DayForgeApplication (Dev - Local H2)",
             "request": "launch",
             "mainClass": "com.dayforge.DayForgeApplication",
-            "projectName": "dayforge"
+            "projectName": "dayforge",
+            "args": "--spring.profiles.active=dev"
+        },
+        {
+            "type": "java",
+            "name": "DayForgeApplication (Production - Supabase)",
+            "request": "launch",
+            "mainClass": "com.dayforge.DayForgeApplication",
+            "projectName": "dayforge",
+            "args": "--spring.profiles.active=supabase"
         },
         {
             "name": "Launch Chrome (Browser)",
@@ -24,9 +33,16 @@
     ],
     "compounds": [
         {
-            "name": "DayForge: Server + Chrome",
+            "name": "DayForge (Dev + Chrome)",
             "configurations": [
-                "DayForgeApplication (Spring Boot Server)",
+                "DayForgeApplication (Dev - Local H2)",
+                "Launch Chrome (Browser)"
+            ]
+        },
+        {
+            "name": "DayForge (Supabase + Chrome)",
+            "configurations": [
+                "DayForgeApplication (Production - Supabase)",
                 "Launch Chrome (Browser)"
             ]
         }

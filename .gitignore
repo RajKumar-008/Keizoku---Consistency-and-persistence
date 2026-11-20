@@ -32,6 +32,11 @@ target/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### Environment & Secrets ###
+.env
+*.env
+!*.env.example
+
 ### Temporary files ###
 *.log
 *.tmp
