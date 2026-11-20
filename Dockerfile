@@ -7,12 +7,11 @@
 FROM maven:3.9-eclipse-temurin-17-alpine AS builder
 WORKDIR /build
 
-# Cache dependency layer
+# Copy pom.xml and source code
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
-
-# Copy source code and package
 COPY src ./src
+
+# Build production JAR (matches finalName 'app' in pom.xml)
 RUN mvn clean package -DskipTests -B
 
 # Stage 2: Minimal runtime image
@@ -26,9 +25,9 @@ USER appuser
 # Copy built JAR from builder stage
 COPY --from=builder /build/target/app.jar app.jar
 
-# Render passes PORT dynamically (default 8080)
+# Render passes PORT dynamically (defaults to 8080 if unset)
 ENV PORT=8080
 EXPOSE 8080
 
-# Run Spring Boot with container-aware JVM settings
-ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+# Run Spring Boot with container-aware JVM settings and shell expansion for PORT
+ENTRYPOINT ["sh", "-c", "exec java -Dserver.port=${PORT:-8080} -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -jar app.jar"]

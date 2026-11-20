@@ -1,8 +1,9 @@
 services:
   - type: web
     name: keizoku
-    runtime: docker
+    env: docker
     dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     healthCheckPath: /api/ping
     envVars:
