@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -107,7 +106,6 @@ public class DatabaseConfig {
         // If credentials are in URL (jdbc:postgresql://user:pass@host), remove credentials from JDBC url
         if (normalized.startsWith("jdbc:postgresql://") && normalized.contains("@")) {
             int atIndex = normalized.indexOf('@');
-            int slashIndex = normalized.indexOf("://");
             normalized = "jdbc:postgresql://" + normalized.substring(atIndex + 1);
         }
 
