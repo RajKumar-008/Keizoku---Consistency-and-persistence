@@ -1,11 +1,15 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
+            "type": "java",
+            "name": "DayForgeApplication (Spring Boot Server)",
+            "request": "launch",
+            "mainClass": "com.dayforge.DayForgeApplication",
+            "projectName": "dayforge"
+        },
+        {
+            "name": "Launch Chrome (Browser)",
             "request": "launch",
             "type": "chrome",
             "url": "http://localhost:8080",
@@ -16,13 +20,15 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
+        }
+    ],
+    "compounds": [
         {
-            "type": "java",
-            "name": "DayForgeApplication",
-            "request": "launch",
-            "mainClass": "com.dayforge.DayForgeApplication",
-            "projectName": "dayforge"
+            "name": "DayForge: Server + Chrome",
+            "configurations": [
+                "DayForgeApplication (Spring Boot Server)",
+                "Launch Chrome (Browser)"
+            ]
         }
     ]
 }
